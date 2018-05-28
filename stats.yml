@@ -1,0 +1,10 @@
+---
+- hosts: stats_server
+  become: yes
+  vars:
+    grafana_http_port: 8080
+    telegraf_config_path: "telegraf_default.conf"
+  roles:
+    - influxdb
+    - grafana
+    - telegraf
