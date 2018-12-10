@@ -1,0 +1,22 @@
+---
+- name: "Install apache modules"
+  apache2_module:
+    state: present
+    name: status
+- name: "Copy http config for wordpress"
+  template:
+    src: templates/wp_http.config
+    dest: /etc/httpd/conf.d/wp_http.conf
+
+- name: "Copy http config for mod_status"
+  tags:
+    - apache_status
+  template:
+    src: templates/apache_status.conf
+    dest: /etc/httpd/conf.d/apache_status.conf
+  when: apache_mod_stats_enabled
+
+- name: "ensure web server is restarted"
+  service:
+    name: httpd
+    state: restarted

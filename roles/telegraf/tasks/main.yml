@@ -5,6 +5,6 @@
     dest: "/etc/telegraf/telegraf.conf"
 - service:
     name: telegraf
-    state: started 
+    state: restarted 
     enabled: yes
     
